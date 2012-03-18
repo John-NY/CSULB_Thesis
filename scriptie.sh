@@ -14,4 +14,4 @@ git add ${DOCUMENT}.bib
 git add scriptie.sh
 git commit -m 'auto upload'
 git push -u origin master
-evince ${PDF}.pdf
+#evince ${PDF}.pdf
