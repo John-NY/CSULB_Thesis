@@ -40,7 +40,7 @@
 	
 	\subsection{background}
 	Gold nanoislands  are formed by annealing a substrate -- on which gold has been uniformly deposited -- to produce islands within a predictable range of size and shape.
-	The uniformity of the size and shape can be inferred by the width of the absorption features in the resulting thin film.
+	
 
 	\subsection{purpose}
 	This research attempts to create reproducible samples of gold nano-islands and study their morphology.
@@ -77,13 +77,15 @@
 	\subsubsection{A model of gold density in Au$_{314}$ and Au$_{25}$ films}
 	The difference in gold density between self-assembling Au$_{314}$ and Au$_{25}$ films can be visually observed.
 	In previous unpublished study, an gold film formed from 8-layers of self-assembled Au$_{25}$ was equivalent in color to a Au$_{314}$ film of approximately 2-4 layers.
-	The relationship between color and film thickness of evaporatively deposited gold films is a documented observation.
-	The color of a gold nano-islands film may be misleading, as nano-island phonons depend not just on thickness, but also size and shape of the islands.
+	The relationship between color and gold film thickness is a well-documented one, for films deposited by evaporation.
+	If instead the color of a nano-island film is observed, the color may be misleading, as nano-island phonons depend not just on thickness, but also size and shape of the islands.  
 	The size and shape of nano-islands depends on factors that include the initial size of the colloidal gold.
 	
-	To reach a first-order estimate of the relative gold density of Au$_{314}$ and Au$_{25}$ films, some assumptions must be made.
-	First, the effect of the pH in the PAH solution on packing density should be considered a second-order effect until demonstrated otherwise.
-	Also, the average length of the ligands are assumed to be fixed (we neglect that these ligands can easily stretch or shrink).
+	To reach a first-order approximation of the relative gold density of Au$_{314}$ and Au$_{25}$ films, some assumptions must be made.
+	First, the average length of the ligands are assumed to be fixed (we neglect that these ligands can easily stretch or shrink).
+	Also, the effect of the pH in the PAH solution on packing density should be considered a second-order effect until demonstrated otherwise.	
+	
+	[image in which the gold particles are modeled as packed spheres]	
 	
 	The approximate ligand length is 2${\mu}m$ for Au$_{314}$ and approximately 1${\mu}m$ for Au$_{25}$.
 	The approximate size of the colloidal gold particles are 2.5${\mu}m$ for Au$_{314}$ and 1${\mu}m$ for Au$_{25}$.
@@ -91,21 +93,48 @@
 	
 	At the first order, three times more layers of Au$_{25}$ should therefore be deposited to yield an equivalent gold mass to the Au$_{314}$ film.
 	
-	In real application, thermolysis of much more than 8 layers of a film will result in defects o.
-	significant density to affect the production of our nanoislands of interest.
+	In real application, thermolysis of much more than 8 layers of a film will result in defects of significant density to affect the production of our nanoislands of interest.
 	It is therefore better to use larger Au$_{314}$ particles instead of many layers of Au$_{25}$.
+
+	\subsection{Size and Shape Distributions and Phonon Absorption Features}
+	The uniformity of the size and shape is expected to correlate with the width of the absorption feature of the resulting sample.
+	A wider distribution of sizes and shapes is expected to produce a broader absorption peak, while a narrower distribution of nanoisland sizes about the average size is expected to produce a sharper absorption feature.
+	This relationship is predicted analytically because identical islands should absorb identically (neglecting second-order effects), producing a maximized peak.  
+	Differences among the islands will create phonons that are offset by some amount from the peak wavelength, resulting in a lower and broader peak.
+	
+
 
 	\subsection{Measurement of Complex Impedance}
 	DC resistance measurements of the electrode show only its insulating properties, as the glass substrate is a poor conductor and the IDE is a weak capacitor, so AC resistance is measured.
+	AC resistance is also shown to follow the temperature-dependent electron mobility.
+	
+	\begin{equation}
+		R = R_0 \cdot exp{\epsilon\over{k\cdotT}}
+		\label{eq:emobility}
+	\end{equation}
+	
 	Sample resistance (a parallel AC resistance) is typically high for the sample under test, this resistance changes when the sample is heated and the polymers are burned off.  
-	The parallel resistance may drop to under 100 ohms during the burn-off of the polymers, which requires a four-point measurement to compensate for the series resistance test lead impedance.
+
+	The resistance $R_p$ of a high-resistance sample can be measured from the complex impedance $(Z,\theta)$ by Equation ~\ref{eq:R_p}.  Use of the parallel resistance $R_p$ is justified at high sample resistance because the series resistance $R_s$ of the test leads and contacts are orders of magnitude smaller.
+	
+	\begin{equation}
+		R_p = {{Z} \over {cos({\theta})}}
+		\label{eq:R_p}
+	\end{equation}
+	
+	Typical values for complex impedance measured by the auto-balancing bridge method via an Agilent 82XX LCR meter are as follows.
+	
+	\begin{equation}
+		\left( Z,\theta,\nu,T \right) = \left( 15 M\Omega, -89.9^\circ, 1kHz, 22^{\circ}C \right)
+	\end{equation}
+	\begin{equation}
+		\left( Z, \theta, \nu, T \right) = \left( 800 k\Omega, -88^\circ, 45kHz, 22^{\circ}C \right)
+	\end{equation}
+	
+	This result shows that the $R_p$ ``resistance'' component (which is $Z$ divided by $cos(-89^\circ)$) is immeasurably high at low frequencies and low temperature.  It is only at higher temperatures that $R_p$ drops to the measurable range, and this occurs at about $250^{\circ}C$ when the impedance phase angle $\theta$ drops from $-89.9^\circ$ towards $0.1^\circ$.
+	
+	During the burn-off of the polymers, the parallel resistance may drop to under 100 ohms, which requires a four-point measurement to compensate for the series resistance test lead impedance.
 	A four-point measurement is necessary because the test leads have been reported (AD5933) to have up to kilo-ohm impedance when measuring low sample resistance.
-	Using a AGILENT TECHNOLOGIES - U1732B would preclude a four-point measurement, but how much impedance is due to the test leads?
-	with high restance and capacitance has not been done
-	Prior measurement of AC resistance over frequency shows that behavior
-	Measurement of complex impedance of the samples allows the
-
-
 
 
 \clearpage
