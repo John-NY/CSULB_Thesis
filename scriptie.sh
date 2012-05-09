@@ -12,6 +12,7 @@ mv ${DOCUMENT}.pdf ${PDF}.pdf
 git add ${DOCUMENT}.tex
 git add ${DOCUMENT}.bib
 git add scriptie.sh
+git add images
 git commit -m 'auto upload'
 git push -u origin master
 #evince ${PDF}.pdf
