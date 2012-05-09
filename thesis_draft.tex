@@ -62,7 +62,7 @@
 	These particles are coated in different organic ligands, which aid their solubility in ethanol (in the case of Au$_{314}$) and water (in the case of Au$_{25}$).    
 	The ligands are terminated with a carboxy group (COOH) in ethanol and aqueous solutions; in the aqueous Au$_{25}$ solution, ligands may also be terminated with a positively charged carboxy group (COO-). 
 	
-	After the first gold layer is deposited the sample is dipped in an aqueous solution of Poly(allylamine hydrochloride) (PAH).  
+	After the first gold layer is deposited the sample is dipped in an aqueous solution of poly(allyl-amine hydrochloride) (PAH).  
 	The PAH bonds to the ligands and allows the next layer to assemble.  	
 	The aqueous PAH molecules are terminated with amine groups (NH$_2$) and with positively charged amine groups (NH$_3^+$).  
 	The relative occurrence of the NH$_3^+$ groups determine the pH of the solution.
@@ -109,9 +109,27 @@
 	AC resistance is also shown to follow the temperature-dependent electron mobility.
 	
 	\begin{equation}
-		R = R_0 cdot \exp{\epsilon\over{k cdot T}}
+		R = R_0 \cdot e^{\epsilon\over{k \cdot T}}
 		\label{eq:emobility}
 	\end{equation}
+	
+	This equation can be rearranged into a linear equation to solve for $\epsilon$.
+	
+	\begin{equation}
+		ln(R) = {\epsilon\over{k}} {1\over{T}} - ln(R_0)
+		\label{eq:solve_emobility}
+	\end{equation}
+	
+	${\epsilon\over{k}}$ and $ln(R_0$ are found by least-squared fit of the linear portion of the data.
+	
+	\begin{figure}
+	
+	\includegraphics[scale=0.4]{images/electron_mobility.eps} 
+	\includegraphics[scale=0.4]{images/electron_mobility_residual.eps}
+	\label{f:emobility}
+	\caption{During cool-down of the sample, the impedance versus temperature measurements are well-sampled, and can be used to solve for electron mobility.  ${\epsilon\over{k}} = 1.1e+04 K$, $\epsilon = 0.96 eV$, $R_0 = 9.1e-3\Omega$.  Error bars are needed, and will have magnitude at least proportional to the fit residuals.}
+	\end{figure}
+	The temperature range observed is between $295K$ and $900K$, 
 	
 	Sample resistance (a parallel AC resistance) is typically high for the sample under test, this resistance changes when the sample is heated and the polymers are burned off.  
 
