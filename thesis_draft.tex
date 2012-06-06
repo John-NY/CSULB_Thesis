@@ -40,7 +40,7 @@
 	
 	\subsection{background}
 	Gold nanoislands  are formed by annealing a substrate -- on which gold has been uniformly deposited -- to produce islands within a predictable range of size and shape.
-	
+
 
 	\subsection{purpose}
 	This research attempts to create reproducible samples of gold nano-islands and study their morphology.
@@ -102,8 +102,66 @@
 	This relationship is predicted analytically because identical islands should absorb identically (neglecting second-order effects), producing a maximized peak.  
 	Differences among the islands will create phonons that are offset by some amount from the peak wavelength, resulting in a lower and broader peak.
 	
+	% This absorption peak should be tested if i can measure the distribution of size features along with the spectral properties.
+	% Now who has the specral analysis setup?  If all else fails, can I talk to Leong.
+	
+	\subsection{Procedure for Preparing Gold Slides}
+	
+	\subsubsection{Preparation of Gold Nanoparticle Solution}
+	The preparation of the gold nanoparticle solution requires about a week of preparation to yield the 10 mL of Au$_{314}$.
+	
 
+	\subsubsection{Layering the Samples}
+	To deposit the self-assembling multilayers on a glass electrode, the following steps are 
+	\begin{itemize}
+		\item First Day
+		\begin{itemize}
+			\item An aqueous solution of poly(allylamine hydrochloride) (PAH) is prepared, adding 10mg PAH to 10mL nanopure water, for use on Day Three.
+			\item 1.0mL methanol is added to 0.1mL triethyl 3-mercaptopropylsilane in a 5mL vial.
+			\item 0.1mL of nanopure water is added to the solution.  (The triethyl 3-mercaptopropylsilane will react with the water and the solution becomes cloudy).
+			
+			\item The IDE is placed in the solution for 24 hours.
+			\item \emph{Note}: it is important not to leave the IDE for more than 24 hours, or the IDE will acquire a thick deposited coating.
+		\end{itemize}
+		\item Second Day
+		\begin{itemize}
+			\item The IDEs are placed in clean 5mL vials.
+			\item Methanol is added to the vials and the samples are sonicated in an ultrasonic bath.
+			\item The methanol wash is removed, and the washing process is repeated 2 more times.
+			\item After the third ultrasonic wash, the samples are gently dried under a stream of nitrogen gas or air.
+			\item After drying, gold nanoparticle solution is added to each vials, enough to cover the IDE.
+			\item The IDEs are left in the nanoparticle solution overnight.
+		\end{itemize}
+		\item Third Day
+		\begin{itemize}
+			\item A work station is prepared with an ultrasonic bath, Pasteur pipettes, nanopure water, ethanol, PAH solution, and several spare 20mL vials for containing waste or re-used liquids.
+			\item for layer = 2:10 
+			\begin{itemize}
+				\item The gold nanoparticle solution is removed from each vial using Pipette A and placed in a 20mL vial for reuse.
+				\item A washing solution of nanopure water (Au$_{25}$) or ethanol (Au$_{314}$) is added to each vial using Pipette A, and the vials are placed in an ultrasonic bath.
+					\subitem Washing the IDE by inverting the vials is not recommended, as this breaks bonding wires.  An ultrasonic bath prevents damage to the wire bonds.
+				\item If the nanoparticle solution is Au$_{314}$, the ethanol is removed with Pipette A, nanopure water added, and the vials are again placed in the ultrasonic bath.
+				\item The nanopure water is removed from the vial (for Au$_{314}$ and Au$_{25}$) using Pipette A.
+				\item The PAH solution is added to each vial using Pipette B and the vials are left to stand for 5 minutes.
+				\item The PAH solution is removed from the vials using Pipette B,  nanopure water is added with Pipette B, the vials are placed in an ultrasonic bath, and the nanopure water is removed using Pipette B.
+				\item If Au$_{314}$, then add ethanol using Pipette A and place the vial once more into the ultrasonic bath, and the ethanol is removed with Pipette A.
+				\item If this layer is not the last layer, the Au$_{314}$ or Au$_{25}$) solution is added to the vials using Pipette A, and the vials are left to stand for 5 minutes.
+			\end{itemize}
+			\item end for loop (next layer)
+			\item The IDEs are gently dried under a stream of nitrogen gas or air, and placed in a vacuum desiccator in the dark, for storage.
+		\end{itemize}
+	\end{itemize}
 
+	\subsection{Bonding and Baking}
+	
+	\subsection{The importance of accurate temperature measurement}
+	Use of multiple thermocouples to measure oven temperature during very rapid heating showed temperature gradients in the air within the oven, and that the glass slides on which the samples are mounted slow the heating of the sample.
+	
+	The oven PID controller creates a closed-loop temperature control system, using a single thermocouple to measure the oven temperature, and a solid-state relay to turn the oven on and off. 
+	In the modified temperature controller, any thermocouple can be used in the PID controller, and we selected a thermocouple mounted to a glass slide by silver epoxy.
+	
+	
+	
 	\subsection{Measurement of Complex Impedance}
 	DC resistance measurements of the electrode show only its insulating properties, as the glass substrate is a poor conductor and the IDE is a weak capacitor, so AC resistance is measured.
 	AC resistance is also shown to follow the temperature-dependent electron mobility.
@@ -161,6 +219,8 @@
 
 
 \end{document}
+
+%% ******************************************************************
 %% The following is some template materials -- equations and figures.
 \documentclass[aps,prl,twocolumn,oneside,showkeys,floatfix]{revtex4-1}
 \newcommand{\BibTeX}{{\sc Bib}\TeX}
@@ -210,4 +270,7 @@
 \lstinputlisting{../find_pulse_train.m}
 \end{widetext}
 
+%% *******  END OF TEMPLATE MATERIALS  ******************************
+%% ******************************************************************
 
+%% *******  Draft Material *******
