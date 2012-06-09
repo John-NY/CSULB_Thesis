@@ -48,6 +48,7 @@
 	Gold nano-island formation through polymer-assisted self-assembly is also sensitive to the initial size of the colloidal gold used to form the self-assembling layers \\cite(reference), to the temperature profile during annealing, and to the length of time (in days) between creation and annealing (\cite{joshi}).
 	This research quantifies the repeatiblity of gold nano-islands produced using the label-free(*) self-assembly method.
 
+
 	\subsection{method}
 	Samples are produced using polymer-assisted self-assembling monolayers.
 
@@ -96,6 +97,13 @@
 	In real application, thermolysis of much more than 8 layers of a film will result in defects of significant density to affect the production of our nanoislands of interest.
 	It is therefore better to use larger Au$_{314}$ particles instead of many layers of Au$_{25}$.
 
+
+	\subsection{How to Evaluate the Reproducibility of Nano-Island Samples}
+	The effectiveness of our process control can be evaluated through direct and indirect measurement of the uniformity of the resulting nano-islands.  
+	Nano-island size and uniformity can be measured directly through atomic force microscope (AFM) images.  
+	Scanning electron microscope (SEM) images may also be used to evaluate size and uniformity, but these images lack resolution to evaluate sizes below {\bf $50nm$ (TBR)}.  
+	Spectral measurements of the nano-island samples will show absorption features which can be used, along with the direct measurements, to indirectly indicate the uniformity of the size distribution of the nano-islands.
+
 	\subsection{Size and Shape Distributions and Phonon Absorption Features}
 	The uniformity of the size and shape is expected to correlate with the width of the absorption feature of the resulting sample.
 	A wider distribution of sizes and shapes is expected to produce a broader absorption peak, while a narrower distribution of nanoisland sizes about the average size is expected to produce a sharper absorption feature.
@@ -103,7 +111,9 @@
 	Differences among the islands will create phonons that are offset by some amount from the peak wavelength, resulting in a lower and broader peak.
 	
 	% This absorption peak should be tested if i can measure the distribution of size features along with the spectral properties.
-	% Now who has the specral analysis setup?  If all else fails, can I talk to Leong.
+	% Now who has the specral analysis setup?  (YS SHON) 
+	% A review article referenced by Joshi thesis may identify the relationship between peak sharpness and size distribution.  
+	% This relation is intuitive to me and to Chuhee, but would benefit from a reference.
 	
 	\subsection{Procedure for Preparing Gold Slides}
 	
@@ -155,10 +165,24 @@
 	\subsection{Bonding and Baking}
 	
 	\subsection{The importance of accurate temperature measurement}
-	Use of multiple thermocouples to measure oven temperature during very rapid heating showed temperature gradients in the air within the oven, and that the glass slides on which the samples are mounted slow the heating of the sample.
+	Use of multiple thermocouples to measure oven temperature during very rapid heating showed large temperature gradients within the oven, and that the glass slides on which the samples are mounted slow the heating of the sample.
+
+	Three thermocouples were used to measure oven temperature.  
+	The oven has a heavy gauge K-type thermocouple at the top of the oven (figure N from the EOY presentation).  
+	A bare 10 mil ($254{\mu}m$) thermocouple was situated near the bottom of the oven.  
+	A third thermocouple was attached to a glass microscope slide with a dab of silver epoxy and placed next to the sample.
+	
+	The IDE sample is responsive to temperature, and a bare IDE should show the same impedance during (fast) heating as it shows during (slow) cooling.  
+	If the temperature measured by a thermocouple results poor overlap of the IDE impedance on the heating and cooling phases, a temperature error can be inferred.
+	In this way the bare slide can serve as a fourth temperature-sensitive device to confirm that the "sample temperature" inferred from the thermocouple temperature measurements accurately tracks temperature.  
+	
+	The glass slide thermocouple placed next to the sample under test (DUT) was shown to best track the DUT temperature.  The glass slide was also used to close the loop of the oven PID for all tests in Spring 2012.  However, because the glass is slower to heat than the air, it can cause a situation in which the oven overheats.  The bare IDE may be a better candidate for the oven PID control, as it measures the air temperature in the oven.  
 	
 	The oven PID controller creates a closed-loop temperature control system, using a single thermocouple to measure the oven temperature, and a solid-state relay to turn the oven on and off. 
-	In the modified temperature controller, any thermocouple can be used in the PID controller, and we selected a thermocouple mounted to a glass slide by silver epoxy.
+	In the modified temperature controller, any thermocouple can be used in the PID controller, and we selected a thermocouple mounted to a glass slide by silver epoxy, since it better tracks the temperature of the IDE sample.
+	It was discovered that the glass slide IDE lags behind the temperature at the top of the oven by as much as $200^{\circ}C$ during fast heating of $30^{\circ}C/min$.  The build-up of heat and the lag of the glass TC resulted in an overheating of the oven when there is no additional safety measures.  A safety measure was introduced into the oven controller code to turn off the heat if any TC measured greater than $+50^{\circ}C$ from the oven setpoint.
+	
+	
 	
 	
 	
