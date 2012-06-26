@@ -192,14 +192,14 @@ Thus, changes in the local environment - such as through the presence of an adso
 	\subsection{Bonding and Baking}
 	
 	\subsection{The importance of accurate temperature measurement}
-	Use of multiple thermocouples (Figure "oven_tc") to measure oven temperature during very rapid heating showed large temperature gradients within the oven, and that the glass slides on which the samples are mounted slow the heating of the sample.
+	Use of multiple thermocouples (Figure "oven\_tc") to measure oven temperature during very rapid heating showed large temperature gradients within the oven, and that the glass slides on which the samples are mounted slow the heating of the sample.
 
 	Three thermocouples were used to measure oven temperature.  
 	The oven has a heavy gauge K-type thermocouple at the top of the oven (tc3 in figure N).  
 	A bare 10 mil ($254{\mu}m$) thermocouple (tc2 in figure N) was situated near the bottom of the oven.  
 	A third thermocouple (tc1 in figure N) was attached to a glass microscope slide with a dab of silver epoxy and placed next to the sample.
 	
-	The IDE sample is responsive to temperature, and a bare IDE should show the same impedance during (fast) heating as it shows during (slow) cooling (Figure "logR_vs_t1_and_t3").  
+	The IDE sample is responsive to temperature, and a bare IDE should show the same impedance during (fast) heating as it shows during (slow) cooling (Figure "logR\_vs\_t1\_and\_t3").  
 	If the temperature measured by a thermocouple results poor overlap of the IDE impedance on the heating and cooling phases, a temperature error can be inferred.
 	In this way the bare slide can serve as a fourth temperature-sensitive device to confirm that the "sample temperature" inferred from the thermocouple temperature measurements accurately tracks temperature.  
 	
@@ -207,7 +207,7 @@ Thus, changes in the local environment - such as through the presence of an adso
 	
 	The oven PID controller creates a closed-loop temperature control system, using a single thermocouple to measure the oven temperature, and a solid-state relay to turn the oven on and off. 
 	In the modified temperature controller, any thermocouple can be used in the PID controller, and we selected a thermocouple mounted to a glass slide by silver epoxy, since it better tracks the temperature of the IDE sample.
-	It was discovered that the glass slide IDE lags behind the temperature at the top of the oven by as much as $200^{\circ}C$ during fast heating of $30^{\circ}C/min$ (Figure "plot_tc3_vs_tc1").  The build-up of heat and the lag of the glass TC resulted in an overheating of the oven when there is no additional safety measures.  A safety measure was introduced into the oven controller code to turn off the heat if any TC measured greater than $+50^{\circ}C$ from the oven setpoint.
+	It was discovered that the glass slide IDE lags behind the temperature at the top of the oven by as much as $200^{\circ}C$ during fast heating of $30^{\circ}C/min$ (Figure "plot\_tc3\_vs\_tc1").  The build-up of heat and the lag of the glass TC resulted in an overheating of the oven when there is no additional safety measures.  A safety measure was introduced into the oven controller code to turn off the heat if any TC measured greater than $+50^{\circ}C$ from the oven setpoint.
 	
 	
 	
@@ -226,7 +226,12 @@ Results of the glass slide thermocouple uniformity measurement shows that three 
 	
 	
 	\section{Electron Transport Measurement using Complex Impedance}
-	A four-point impedance measurement measures complex impedance of the IDE sample under test (device under test, or DUT).  Impedance measurements follow a temperature dependence derived from models of electron transport under an AC potential.  Complex impedance and temperature measurements are used to solve electron mobility under the AC electron transport model detailed below.  Temperature measurements were limited to those measurements taken during cool-down of the DUT, since temperature measurements during fast heating of the sample carry very large errors.  Measurements of impedance over temperature during cool-down (FIGURE "cooldown_residuals") were identical within uncertainties for the Au$_25$ sample (JD04) and a bare IDE sample (JD05), and electron mobility will be identical.  Electron mobility calculated for the Au$_25$ (JD04) sample was ${\epsilon\over{k}} = 1.1e+04 K$, $\epsilon = 0.96 eV$.
+	A four-point impedance measurement measures complex impedance of the IDE sample under test (device under test, or DUT).  
+Impedance measurements follow a temperature dependence derived from models of electron transport under an AC potential.  
+Complex impedance and temperature measurements are used to solve electron mobility under the AC electron transport model detailed below.  
+Temperature measurements were limited to those measurements taken during cool-down of the DUT, since temperature measurements during fast heating of the sample carry very large errors.  
+Measurements of impedance over temperature during cool-down (FIGURE "cooldown\_residuals") were identical within uncertainties for the Au$_25$ sample (JD04) and a bare IDE sample (JD05), and electron mobility will be identical.  
+Electron mobility calculated for the Au$_25$ (JD04) sample was ${\epsilon\over{k}} = 1.1e+04 K$, $\epsilon = 0.96 eV$.
 		
 	\subsection{Introduction: Measurement of Complex Impedance} 
 	DC resistance measurements of the electrode show only its insulating properties, as the glass substrate is a poor conductor and the IDE is a weak capacitor, so AC resistance is measured.
@@ -333,7 +338,7 @@ Results of the glass slide thermocouple uniformity measurement shows that three 
 \subsection{Spin Echo Peak-Finder Algorithm in Matlab}
 \lstset{language=Matlab, basicstyle=\footnotesize, numbers=left, captionpos=t, breaklines=true, caption=find\_spin\_echo() locates the pulse maxima in a spin-echo pulse train, label=T2 Pulse Train, frame=shadowbox}
 \lstset{basicstyle=\small\ttfamily, basewidth=0.51em}
-\lstinputlisting{../find_pulse_train.m}
+\lstinputlisting{../find\_pulse\_train.m}
 \end{widetext}
 
 %% *******  END OF TEMPLATE MATERIALS  ******************************
