@@ -211,6 +211,18 @@ Thus, changes in the local environment - such as through the presence of an adso
 	
 	
 	
+\subsection{Analysis of Oven Temperature Uniformity Using Three Glass Slide Thermocouples}
+To test the reproducibility of the glass slide thermocouple, three glass slide thermocouples were made, by affixing a K-type thermocouple to the surface of a glass microscope slide.
+A fourth thermocouple was left bare and placed at the bottom of the oven for use in the PID temperature controller.
+While the glass slide thermocouple can be used in the PID loop to raise the oven temperature, it requires a gradient limiter to function safely.  
+The gradient limiter shuts off heating if the temperature between any two thermocouples exceeds a threshold ($50^{\circ}C$ was used), and is best used with one thermocouple at the top of the oven (otherwise the gradient is not well sampled).
+
+Because the temperature controller built for this project is limited to four K-type thermocouples, a trade-off was made between fast heating (for which a glass slide TC is used) and complexity (the requirement that the heating gradient be limited). 
+A consequence to using an oven shut-off is that the heating is no longer at an even rate, and the temperature characterization emphasizes errors (Figure "shutoff emphasizes errors in Au25 test").
+
+Results of the glass slide thermocouple uniformity measurement shows that three glass slides placed across the bottom of the oven, when heated at a rate $25^{\/circ}C$ per second, show a disagreement of $X^{\circ}C$ at the fastest rate of heating (Figure "three slides result").
+
+
 	
 	
 	\section{Electron Transport Measurement using Complex Impedance}
