@@ -52,19 +52,18 @@
 
 	Gold nano-island formation through polymer-assisted self-assembly is also sensitive to the initial size of the colloidal gold used to form the self-assembling layers \\cite(reference), to the temperature profile during annealing, and to the length of time (in days) between creation and annealing (\cite{joshi}).
 
-[ more junk to clean up -- if I analyze how the polymer-deposited samples decay in air, it'll be done near the end of my research and be given a single paragraph and one figure ]
+	[ more junk to clean up -- if I analyze how the polymer-deposited samples decay in air, it'll be done near the end of my research and be given a single paragraph and one figure ]
 	
 	This research quantifies the repeatiblity of gold nano-islands produced using the label-free(*) self-assembly method.
 
-[quote junk: I want these somewhere]
+	[quote junk: I want these somewhere]
 	
-\begin{quote}
-Plasmonic nanoparticles also act as transducers that convert small changes in the local refractive index into spectral shifts in the intense nanoparticle extinction and scattering spectra. 
-Most organic molecules have a higher refractive index than buffer solution; 
-thus, when they bind to nanoparticles, the local refractive index increases, causing the extinction and scattering spectrum to redshift. 
-Molecular binding can be monitored in real time with high sensitivity by using simple and inexpensive transmission spectrometry, which measures extinction, the sum of absorption and scattering 3,8-10,41,42. 
-\cite{nature2008}
-\end{quote}
+	\begin{quote}
+	Plasmonic nanoparticles also act as transducers that convert small changes in the local refractive index into spectral shifts in the intense nanoparticle extinction and scattering spectra. 
+	Most organic molecules have a higher refractive index than buffer solution; thus, when they bind to nanoparticles, the local refractive index increases, causing the extinction and scattering spectrum to redshift. 
+	Molecular binding can be monitored in real time with high sensitivity by using simple and inexpensive transmission spectrometry, which measures extinction, the sum of absorption and scattering 3,8-10,41,42. 
+	\cite{nature2008}
+	\end{quote}
 
 \begin{quote}
 Thus, changes in the local environment - such as through the presence of an adsorbed species - should cause a shift in $\lambda_max$ .
@@ -220,14 +219,34 @@ Thus, changes in the local environment - such as through the presence of an adso
 	[ Oven was modified from PID control to custom microcontroller code, up to four thermocouple measurments were used ]
 
 	\subsection{The importance of accurate temperature measurement}
-	Use of multiple thermocouples (Figure "oven\_tc") to measure oven temperature during very rapid heating showed large temperature gradients within the oven, and that the glass slides on which the samples are mounted slow the heating of the sample.
+	
+	
+	\begin{figure}
+		\includegraphics[width=70mm]{images/oven_tc_placement.eps}
+		\caption{Placement of the three thermocouples and the sample within the oven used to measure oven/sample temperature.  TC1 is the glass-slide thermocouple, TC2 is a bare TC, TC3 is the oven TC, and S is the sample.}
+		\label{f:oven_tc}
+	\end{figure}
+	
+	\begin{figure}
+		\includegraphics[width=80mm]{images/plot_logR_vs_tc1_and_tc3.eps}
+		\caption{If temperature is accurately measured, the log impedance of the bare IDE sample will match on heating and cooling.  The closer the overlap between heating and cooling, the better the thermocouple matches the temperature seen by the sample. }
+		\label{f:logR_vs_t1_and_t3}
+	\end{figure}
+	
+	\begin{figure}
+		\includegraphics[width=80mm]{images/residual_plot_tc3_vs_tc1.eps}
+		\caption{f:plot\_tc3\_vs\_tc1}
+		\label{f:plot_tc3_vs_tc1}
+	\end{figure}
+	
+	Use of multiple thermocouples (Figure ~\ref{f:oven_tc}) to measure oven temperature during very rapid heating showed large temperature gradients within the oven, and that the glass slides on which the samples are mounted slow the heating of the sample.
 
 	Three thermocouples were used to measure oven temperature.  
-	The oven has a heavy gauge K-type thermocouple at the top of the oven (tc3 in Figure "oven\_tc").  
-	A bare 10 mil ($254{\mu}m$) thermocouple (tc2 in figure "oven\_tc") was situated near the bottom of the oven.  
-	A third thermocouple (tc1 in figure "oven\_tc") was attached to a glass microscope slide with a dab of silver epoxy and placed next to the sample.
+	The oven has a heavy gauge K-type thermocouple at the top of the oven (tc3 in Figure ~\ref{f:oven_tc}).  
+	A bare 10 mil ($254{\mu}m$) thermocouple (tc2 in Figure ~\ref{f:oven_tc}) was situated near the bottom of the oven.  
+	A third thermocouple (tc1 in Figure ~\ref{f:oven_tc}) was attached to a glass microscope slide with a dab of silver epoxy and placed next to the sample.
 	
-	The IDE sample is responsive to temperature, and a bare IDE should show the same impedance during (fast) heating as it shows during (slow) cooling (Figure "logR\_vs\_t1\_and\_t3").  
+	The IDE sample is responsive to temperature, and a bare IDE should show the same impedance during (fast) heating as it shows during (slow) cooling (Figure ~\ref{f:logR_vs_t1_and_t3}).  
 	If the temperature measured by a thermocouple results poor overlap of the IDE impedance on the heating and cooling phases, a temperature error can be inferred.
 	In this way the bare slide can serve as a fourth temperature-sensitive device to confirm that the "sample temperature" inferred from the thermocouple temperature measurements accurately tracks temperature.  
 	
@@ -239,7 +258,7 @@ Thus, changes in the local environment - such as through the presence of an adso
 	Since the glass-slide TC best tracks the temperature of the IDE sample, it was believed to result in fastest heating.
 	However, because the glass is slower to heat than the air, it can cause a situation in which the oven overheats. 
 	
-	It was discovered in early testing that the glass slide IDE lags behind the temperature at the top of the oven by as much as $200^{\circ}C$ during fast heating of $30^{\circ}C/min$ (Figure "plot\_tc3\_vs\_tc1").  
+	It was discovered in early testing that the glass slide IDE lags behind the temperature at the top of the oven by as much as $200^{\circ}C$ during fast heating of $30^{\circ}C/min$ (Figure ~\ref{f:residual_plot_tc3_vs_tc1}).  
 	The build-up of heat and the lag of the glass TC resulted in an overheating of the oven when there is no additional safety measures.  
 	A safety measure was introduced into the oven controller code to turn off the heat if any TC measured greater than $+50^{\circ}C$ from the oven setpoint.
 
@@ -261,24 +280,24 @@ Thus, changes in the local environment - such as through the presence of an adso
 		\caption{The plot at left shows the standard deviation among the three glass slide thermocouples during fast heating, which is approximately the magnitude of the bias uncertainty in temperature during heating.  The temperature variance versus heating rate is plotted at left.  The magnitude of the temperature gradients across the base of the oven are non-linearly proportional to temperature.}
 	\end{figure}
 	
-To test the reproducibility of the glass slide thermocouple, three glass slide thermocouples were made, by affixing a K-type thermocouple to the surface of a glass microscope slide.
-A fourth thermocouple was left bare and placed at the bottom of the oven for use in the PID temperature controller.
-While the glass slide thermocouple can be used in the PID loop to raise the oven temperature, it requires a gradient limiter to function safely.  
-The gradient limiter shuts off heating if the temperature between any two thermocouples exceeds a threshold ($50^{\circ}C$ was used), and is best used with one thermocouple at the top of the oven (otherwise the gradient is not well sampled).
+	To test the reproducibility of the glass slide thermocouple, three glass slide thermocouples were made, by affixing a K-type thermocouple to the surface of a glass microscope slide.
+	A fourth thermocouple was left bare and placed at the bottom of the oven for use in the PID temperature controller.
+	While the glass slide thermocouple can be used in the PID loop to raise the oven temperature, it requires a gradient limiter to function safely.  
+	The gradient limiter shuts off heating if the temperature between any two thermocouples exceeds a threshold ($50^{\circ}C$ was used), and is best used with one thermocouple at the top of the oven (otherwise the gradient is not well sampled).
 
-Because the temperature controller built for this project is limited to four K-type thermocouples, a trade-off was made between fast heating (for which a glass slide TC is used) and complexity (the requirement that the heating gradient be limited). 
-A consequence to using an oven shut-off is that the heating is no longer at an even rate, and the temperature characterization emphasizes errors (Figure "shutoff emphasizes errors in Au25 test").
+	Because the temperature controller built for this project is limited to four K-type thermocouples, a trade-off was made between fast heating (for which a glass slide TC is used) and complexity (the requirement that the heating gradient be limited). 
+	A consequence to using an oven shut-off is that the heating is no longer at an even rate, and the temperature characterization emphasizes errors (Figure "shutoff emphasizes errors in Au25 test").
 
-Results of the glass slide thermocouple uniformity measurement shows that three glass slides placed across the bottom of the oven, when heated at a rate $25^{\/circ}C$ per second, show a disagreement of $X^{\circ}C$ at the fastest rate of heating (Figure "three slides result").
+	Results of the glass slide thermocouple uniformity measurement shows that three glass slides placed across the bottom of the oven, when heated at a rate $25^{\/circ}C$ per second, show a disagreement of $X^{\circ}C$ at the fastest rate of heating (Figure "three slides result").
 
 	
 	\subsection{Electron Transport Measurement using Complex Impedance}
 	A four-point impedance measurement measures complex impedance of the IDE sample under test (device under test, or DUT).  
-Impedance measurements follow a temperature dependence derived from models of electron transport under an AC potential.  
-Complex impedance and temperature measurements are used to solve electron mobility under the AC electron transport model detailed below.  
-Temperature measurements were limited to those measurements taken during cool-down of the DUT, since temperature measurements during fast heating of the sample carry very large errors.  
-Measurements of impedance over temperature during cool-down (FIGURE "cooldown\_residuals") were identical within uncertainties for the Au$_25$ sample (JD04) and a bare IDE sample (JD05), and electron mobility will be identical.  
-Electron mobility calculated for the Au$_25$ (JD04) sample was ${\epsilon\over{k}} = 1.1e+04 K$, $\epsilon = 0.96 eV$.
+	Impedance measurements follow a temperature dependence derived from models of electron transport under an AC potential.  
+	Complex impedance and temperature measurements are used to solve electron mobility under the AC electron transport model detailed below.  
+	Temperature measurements were limited to those measurements taken during cool-down of the DUT, since temperature measurements during fast heating of the sample carry very large errors.  
+	Measurements of impedance over temperature during cool-down (FIGURE "cooldown\_residuals") were identical within uncertainties for the Au$_25$ sample (JD04) and a bare IDE sample (JD05), and electron mobility will be identical.  
+	Electron mobility calculated for the Au$_25$ (JD04) sample was ${\epsilon\over{k}} = 1.1e+04 K$, $\epsilon = 0.96 eV$.
 		
 	\subsubsection{Introduction: Measurement of Complex Impedance} 
 	DC resistance measurements of the electrode show only its insulating properties, as the glass substrate is a poor conductor and the IDE is a weak capacitor, so AC resistance is measured.
