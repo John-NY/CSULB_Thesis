@@ -35,10 +35,10 @@
 
         \section{Introduction}
 
-[intro junk until page 3 -- i'll fix this up Wed June 27]
+[ ancient intro junk until page 3 -- i'll fix this up in the next week ]
 
 	\begin{figure}
-	\includegraphics[scale=0.4]{images/IDE.eps} \label{f:IDE}
+	\includegraphics[width=60mm]{images/IDE.eps} \label{f:IDE}
 	\caption{The self-assembling gold monolayers are deposited on a gold inter-digitized electrode (IDE).}
 	\end{figure}
 	
@@ -48,7 +48,10 @@
 	
 	Prior research suggests that the physical properties of gold nano-islands are sensitive to the method of depositing the gold, the number of layers, and variations in annealing temperature \cite{shon11}.
 
+	[The LSPR absorption features of colloidal gold are shown by Kedem and Rubinstein (2011 acs) [add to bibtex, make sure it's original research]
+
  [there is more research to cite here -- lots of study of self-assembled islands from evaporative deposition by Van Duyne and his chain of relevant citations show properties vs. size et cetera, and I should find the proper method of citing other people's figures].  
+
 
 	Gold nano-island formation through polymer-assisted self-assembly is also sensitive to the initial size of the colloidal gold used to form the self-assembling layers \\cite(reference), to the temperature profile during annealing, and to the length of time (in days) between creation and annealing (\cite{joshi}).
 
@@ -71,7 +74,8 @@ Thus, changes in the local environment - such as through the presence of an adso
 \end{quote}
 
 	\begin{figure}
-		\includegraphics[width=80mm]{images/placeholder.eps}
+		\includegraphics[width=120mm]{images/2011_Kedem_morphology.eps}
+		\includegraphics[width=50mm]{images/2011_Kedem_spectroscopy.eps}
 		\caption{Two promenant figures should be a morphology characterization table and characteristic LSPR spectra with error bars if I can pull it off well-enough.}
 	\end{figure}
 
@@ -152,21 +156,50 @@ Thus, changes in the local environment - such as through the presence of an adso
 	\end{quote}
 	
 
-	
-	% This absorption peak should be tested if i can measure the distribution of size features along with the spectral properties.
-	% Now who has the specral analysis setup?  (YS SHON) 
-	% A review article referenced by Joshi thesis may identify the relationship between peak sharpness and size distribution.  
-	% This relation is intuitive to me and to Chuhee, but would benefit from a reference.
+	\clearpage 
+	%% Chapter: Temperature Errors and Controls	%% Chapter: Temperature Errors and Controls	%% Chapter: Temperature Errors and Controls	%% Chapter: Temperature Errors and Controls	%% Chapter: Temperature Errors and Controls	%% Chapter: Temperature Errors and Controls	%% Chapter: Temperature Errors and Controls	%% Chapter: Temperature Errors and Controls
+	\section{Temperature Control, Measurement, and Errors}
 
-	\clearpage
-	\section{The Temperature Control and Measurement System}
-	\subsection{The importance of accurate temperature measurement}
+	In-situ measurements require the measurement of temperature and impedance.  
+	The impedance is measured at the sample, while the temperature is inferred from thermocouple measurments.
+	Temperature measurments with more than one thermocouple showed that fast heating is uneven across the furnace.  
+	Also, during fast heating, impedance measurements of a bare electrode did not match their expected temperature dependance, when the temperature was measured with a nearby 10-mil bare wire K-type thermocouple in air.
+	The glass of the electrode caused the sample temperature to lag up to $100^{\circ}C$ behind the air temperature during fast heating.
+
+	\subsection{Temperature Control}
+
+	[ Figures: Furnace Picture, Schematic, McL Engineeing TC shield image ... also link to the Appendix A]
+
+	To allow temperature to be accurately measured (within $50^{\circ}C$ or better) during fast heating, the heating rate must be controlled.
+	The COTS Thermolyne furnace temperature controller is a simple PID, which when given a setpoint temperature, will approach this temperature as fast as its capabilities allow.
+	To slow the heating to a rate such that the sample temperature may be accurately measured, intermediate PID setpoints must be introduced leading to the final temperature.
+
+	Prior experiments by Toyanath Joshi used a methodical and manual approach of increasing the PID setpoint temperature at the desired rate.
 	
+	For the research conducted here, an automated PID controller was constructed using Arduino microcontroller, an open-source hardware thermocouple add-on, and the existing solid-state relay within the Thermolyne furnace.  
+	The Arduino microcontroller is well-documented (cite:arduino.cc), and its form factor supports a number of add-on boards(``shields'') produced by a large number of independant amateur and commercial vendors.
+	The thermocouple ``shield'' contains four addressable MAX31855 thermocouple digitizers with cold-junction compensation and includes connectors for four K-type thermocouples.
+	The solid-state relay within the Thermolyne furnace was easy to control, as the old PID control could be simply disconnected and swapped for a new controller (include pic when i'm willing to do disconnect the furnace).
+
+	The Arduino has a USB computer interface but also runs stand-alone code independantly of the computer.
+	This means the oven temperature is always controlled by the microcontroller, but the computer interface may be used to request changes to the program running on the controller.
+	The computer is used to set a final setpoint temperature and a rate at which the temperature should be approached.  
+	The microcontroller uses these two parameters, along with the current temperature measured from its sensor, to break the ramp into a time-dependant setpoint temperature to pass to a PID algorithm.
+	The PID algorithm decides how best to approach the current setpoint (which will change over time), and over time, the fial setpoint will be reached.
+
+	[the PID is better described by code or flow chart than equation]
+
+
+	In the modified temperature controller, any single one of four thermocouples can be used in the PID controller.	
+	
+	
+
+	\subsection{Temperature Measurement}
 	
 	\begin{figure}
 		\includegraphics[width=70mm]{images/oven_tc_placement.eps}
-		\caption{Placement of the three thermocouples and the sample within the oven used to measure oven/sample temperature.  TC1 is the glass-slide thermocouple, TC2 is a bare TC, TC3 is the oven TC, and S is the sample.}
-		\label{f:oven_tc}
+		\caption{Placement of the three thermocouples and the sample within the furnace used to measure furnace/sample temperature.  TC1 is the glass-slide thermocouple, TC2 is a bare TC, TC3 is the furnace TC, and S is the sample.}
+		\label{f:furnace_tc}
 	\end{figure}
 	
 	\begin{figure}
@@ -181,60 +214,68 @@ Thus, changes in the local environment - such as through the presence of an adso
 		\label{f:plot_tc3_vs_tc1}
 	\end{figure}
 	
-	Use of multiple thermocouples (Figure ~\ref{f:oven_tc}) to measure oven temperature during very rapid heating showed large temperature gradients within the oven, and that the glass slides on which the samples are mounted slow the heating of the sample.
+	Use of multiple thermocouples (Figure ~\ref{f:furnace_tc}) to measure furnace temperature during very rapid heating showed large temperature gradients within the furnace, and that the glass slides on which the samples are mounted slow the heating of the sample.
 
-	Three thermocouples were used to measure oven temperature.  
-	The oven has a heavy gauge K-type thermocouple at the top of the oven (tc3 in Figure ~\ref{f:oven_tc}).  
-	A bare 10 mil ($254{\mu}m$) thermocouple (tc2 in Figure ~\ref{f:oven_tc}) was situated near the bottom of the oven.  
-	A third thermocouple (tc1 in Figure ~\ref{f:oven_tc}) was attached to a glass microscope slide with a dab of silver epoxy and placed next to the sample.
+	Three thermocouples were used to measure furnace temperature.  
+	The furnace has a heavy gauge K-type thermocouple at the top of the furnace (tc3 in Figure ~\ref{f:furnace_tc}).  
+	A bare 10 mil ($254{\mu}m$) thermocouple (tc2 in Figure ~\ref{f:furnace_tc}) was situated near the bottom of the furnace.  
+	A third thermocouple (tc1 in Figure ~\ref{f:furnace_tc}) was attached to a glass microscope slide with a dab of silver epoxy and placed next to the sample.
 	
 	The IDE sample is responsive to temperature, and a bare IDE should show the same impedance during (fast) heating as it shows during (slow) cooling (Figure ~\ref{f:logR_vs_t1_and_t3}).  
 	If the temperature measured by a thermocouple results poor overlap of the IDE impedance on the heating and cooling phases, a temperature error can be inferred.
 	In this way the bare slide can serve as a fourth temperature-sensitive device to confirm that the "sample temperature" inferred from the thermocouple temperature measurements accurately tracks temperature.  
 	
-	The oven PID controller creates a closed-loop temperature control system, using a single thermocouple to measure the oven temperature, and a solid-state relay to turn the oven on and off. 
+	The furnace PID controller creates a closed-loop temperature control system, using a single thermocouple to measure the furnace temperature, and a solid-state relay to turn the furnace on and off. 
 
 	In the modified temperature controller, any thermocouple can be used in the PID controller.	
 	
-	For all oven tests in Spring 2012, we selected a thermocouple mounted to a glass slide by silver epoxy to close the loop of the PID system.
+	For all furnace tests in Spring 2012, we selected a thermocouple mounted to a glass slide by silver epoxy to close the loop of the PID system.
 	Since the glass-slide TC best tracks the temperature of the IDE sample, it was believed to result in fastest heating.
-	However, because the glass is slower to heat than the air, it can cause a situation in which the oven overheats. 
+	However, because the glass is slower to heat than the air, it can cause a situation in which the furnace overheats. 
 	
-	It was discovered in early testing that the glass slide IDE lags behind the temperature at the top of the oven by as much as $200^{\circ}C$ during fast heating of $30^{\circ}C/min$ (Figure ~\ref{f:residual_plot_tc3_vs_tc1}).  
+	It was discovered in early testing that the glass slide IDE lags behind the temperature at the top of the furnace by as much as $200^{\circ}C$ during fast heating of $30^{\circ}C/min$ (Figure ~\ref{f:residual_plot_tc3_vs_tc1}).  
 	The build-up of heat and the lag of the glass TC resulted in an overheating of the oven when there is no additional safety measures.  
-	A safety measure was introduced into the oven controller code to turn off the heat if any TC measured greater than $+50^{\circ}C$ from the oven setpoint.
+	A safety measure was introduced into the furnace controller code to turn off the heat if any TC measured greater than $+50^{\circ}C$ from the furnace setpoint.
 
-	For all oven tests in Summer 2012, we selected a bare thermocouple positioned at the bottom of the oven (tc2 in Figure "oven\_tc") to close the loop of the PID system.
+	For all furnace tests in Summer 2012, we selected a bare thermocouple positioned at the bottom of the furnace (tc2 in Figure ~\ref{furnace_tc}) to close the loop of the PID system.
 	Use of the bare TC in the PID system avoids the problem of overheating, and in testing (Section ~\ref{sec:Temperature_Uniformity_Three_Slides}), the glass slide temperature was controlled under fast heating to $625^{\circ}C$ at a rate of $30^{\circ}C/min$ with an overshoot of the sample temperature (measured by the glass slide) of just $2^{\circ}C$  [TBR].  
-	The lack of run-away heating results from the rapid response of the glass slide thermocouple to small changes in air temperature within the oven, and the mass of the glass slide which causes a slow approach to the final temperature.
+	The lack of run-away heating results from the rapid response of the glass slide thermocouple to small changes in air temperature within the furnace, and the mass of the glass slide which causes a slow approach to the final temperature.
 
 	
-\subsection{Analysis of Oven Temperature Uniformity Using Three Glass Slide Thermocouples}
-\label{sec:Temperature_Uniformity_Three_Slides}
+	\subsection{Temperature Errors: Fast Heating is Uneven} \label{sec:Temperature_Uniformity_Three_Slides}
+
+	\subsubsection{Analysis of Furnace Temperature Uniformity Using Three Glass Slide Thermocouples}
 
 	\begin{figure}
 		\includegraphics[width=140mm]{images/Oven_Thermocouple_4x.eps}
-		\caption{Additional glass slide thermocouples were produced and used to measure the uniformity of the oven temperature and similarity among glass-slide thermocouples.  Three glass slide thermocouples were used for measurement, and a fourth bare TC was used in the PID controller during this test.}
+		\caption{Additional glass slide thermocouples were produced and used to measure the uniformity of the furnace temperature and similarity among glass-slide thermocouples.  Three glass slide thermocouples were used for measurement, and a fourth bare TC was used in the PID controller during this test.}
 	\end{figure}
 	\begin{figure}
 		\includegraphics[width=140mm]{images/heating_data.eps}
 		\includegraphics[width=140mm]{images/variance_vs_rate.eps}
-		\caption{The plot at left shows the standard deviation among the three glass slide thermocouples during fast heating, which is approximately the magnitude of the bias uncertainty in temperature during heating.  The temperature variance versus heating rate is plotted at left.  The magnitude of the temperature gradients across the base of the oven are non-linearly proportional to temperature.}
+		\caption{The plot at left shows the standard deviation among the three glass slide thermocouples during fast heating, which is approximately the magnitude of the bias uncertainty in temperature during heating.  The temperature variance versus heating rate is plotted at left.  The magnitude of the temperature gradients across the base of the furnace are non-linearly proportional to temperature.}
 	\end{figure}
 	
 	To test the reproducibility of the glass slide thermocouple, three glass slide thermocouples were made, by affixing a K-type thermocouple to the surface of a glass microscope slide.
-	A fourth thermocouple was left bare and placed at the bottom of the oven for use in the PID temperature controller.
-	While the glass slide thermocouple can be used in the PID loop to raise the oven temperature, it requires a gradient limiter to function safely.  
-	The gradient limiter shuts off heating if the temperature between any two thermocouples exceeds a threshold ($50^{\circ}C$ was used), and is best used with one thermocouple at the top of the oven (otherwise the gradient is not well sampled).
+	A fourth thermocouple was left bare and placed at the bottom of the furnace for use in the PID temperature controller.
+	While the glass slide thermocouple can be used in the PID loop to raise the furnace temperature, it requires a gradient limiter to function safely.  
+	The gradient limiter shuts off heating if the temperature between any two thermocouples exceeds a threshold ($50^{\circ}C$ was used), and is best used with one thermocouple at the top of the furnace (otherwise the gradient is not well sampled).
 
 	Because the temperature controller built for this project is limited to four K-type thermocouples, a trade-off was made between fast heating (for which a glass slide TC is used) and complexity (the requirement that the heating gradient be limited). 
-	A consequence to using an oven shut-off is that the heating is no longer at an even rate, and the temperature characterization emphasizes errors (Figure "shutoff emphasizes errors in Au25 test").
+	A consequence to using an furnace shut-off is that the heating is no longer at an even rate, and the temperature characterization emphasizes errors (Figure "shutoff emphasizes errors in Au25 test").
 
-	Results of the glass slide thermocouple uniformity measurement shows that three glass slides placed across the bottom of the oven, when heated at a rate $25^{\/circ}C$ per second, show a disagreement of $X^{\circ}C$ at the fastest rate of heating (Figure "three slides result").
+	Results of the glass slide thermocouple uniformity measurement shows that three glass slides placed across the bottom of the furnace, when heated at a rate $25^{\/circ}C$ per second, show a disagreement of $X^{\circ}C$ at the fastest rate of heating (Figure "three slides result").
 
 	\clearpage
 	
-	\section{Procedure}	
+	\section{ Post-Processing Measurement Methods Discussion }
+	\subsection{AFM}
+	\subsection{SEM}
+	\subsection{LSPR}
+
+
+
+	\section{Gold Nano Island Preparation}	
 
 	\subsection{Preparing Gold Slides}
 	
@@ -288,13 +329,20 @@ Thus, changes in the local environment - such as through the presence of an adso
 	\subsubsection{Attaching Bonding Wires for Four-Point Impedance Measurement}
 	[ Discussion and images of two methods of bonding used in this study ]
 	
-	\subsubsection{Baking and Temperature Controls}
 	
-	[ Link to appendix A from early "thesis\_draft".  Include PID controller, TC interface. ]
-	
-	[ Oven was modified from PID control to custom microcontroller code, up to four thermocouple measurments were used ]
+	\section{Electron Transport Measurements of Au$_{25}$}
+	\subsection{Setup/Procedure}
+	\subsection{Impedance, Temperature Measurements, AFM/SEM Images, LSPR}
+	\subsection{Conclusions}
 
-	
+	\section{Electron Transport Measurements of Au$_{314}$}
+	\subsection{Setup/Procedure}
+	\subsection{Impedance, Temperature Measurements, AFM/SEM Images, LSPR}
+	\subsection{Conclusions}
+
+
+	\section{In-Situ Transport Measurements and Complex Impedance}
+
 	\subsection{Electron Transport Measurement using Complex Impedance}
 	A four-point impedance measurement measures complex impedance of the IDE sample under test (device under test, or DUT).  
 	Impedance measurements follow a temperature dependence derived from models of electron transport under an AC potential.  
@@ -352,6 +400,7 @@ Thus, changes in the local environment - such as through the presence of an adso
 	
 	During the burn-off of the polymers, the parallel resistance may drop to under 100 ohms, which requires a four-point measurement to compensate for the series resistance test lead impedance.
 	A four-point measurement is necessary because the test leads have been reported (AD5933) to have up to kilo-ohm impedance when measuring low sample resistance.
+
 
 
 \clearpage
