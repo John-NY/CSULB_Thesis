@@ -31,18 +31,18 @@
 	\maketitle
 
 	\tableofcontents
-	
+	\clearpage
 
         \section{Introduction}
 
-[ ancient intro junk until page 3 -- i'll fix this up in the next week ]
+[*********** ancient intro junk until page 3 -- i'll fix this up in the next week ***********]
 
 	\begin{figure}
 	\includegraphics[width=60mm]{images/IDE.eps} \label{f:IDE}
 	\caption{The self-assembling gold monolayers are deposited on a gold inter-digitized electrode (IDE).}
 	\end{figure}
 	
-	Gold nanoislands  are formed by annealing a substrate -- on which gold has been uniformly deposited -- to produce islands within a predictable range of size and shape.
+	Gold nanoislands are formed by annealing a substrate -- on which gold has been uniformly deposited -- to produce islands within a predictable range of size and shape.
 	
 	This research attempts to characterizes the reproducibility of gold nano-island morphology using the polymer-assisted deposition and self-assembly method.
 	
@@ -58,6 +58,8 @@
 	[ more junk to clean up -- if I analyze how the polymer-deposited samples decay in air, it'll be done near the end of my research and be given a single paragraph and one figure ]
 	
 	This research quantifies the repeatiblity of gold nano-islands produced using the label-free(*) self-assembly method.
+
+[*******************************************************]
 
 	[quote junk: I want these somewhere]
 	
@@ -158,6 +160,7 @@
 
 	\clearpage 
 	%% Chapter: Temperature Errors and Controls	%% Chapter: Temperature Errors and Controls	%% Chapter: Temperature Errors and Controls	%% Chapter: Temperature Errors and Controls	%% Chapter: Temperature Errors and Controls	%% Chapter: Temperature Errors and Controls	%% Chapter: Temperature Errors and Controls	%% Chapter: Temperature Errors and Controls
+
 	\section{Temperature Control, Measurement, and Errors}
 
 	In-situ measurements require the measurement of temperature and impedance.  
@@ -166,168 +169,11 @@
 	Also, during fast heating, impedance measurements of a bare electrode did not match their expected temperature dependance, when the temperature was measured with a nearby 10-mil bare wire K-type thermocouple in air.
 	The glass of the electrode caused the sample temperature to lag up to $100^{\circ}C$ behind the air temperature during fast heating.
 
-	\subsection{Temperature Control}
+	\input{temperature_control.tex}
 
-	[ Figures: Furnace Picture, Schematic, McL Engineeing TC shield image ... also link to the Appendix A]
-
-	To allow temperature to be accurately measured (within $50^{\circ}C$ or better) during fast heating, the heating rate must be controlled.
-	The COTS Thermolyne furnace temperature controller is a simple PID, which when given a setpoint temperature, will approach this temperature as fast as its capabilities allow.
-	To slow the heating to a rate such that the sample temperature may be accurately measured, intermediate PID setpoints must be introduced leading to the final temperature.
-
-	Prior experiments by Toyanath Joshi used a methodical and manual approach of increasing the PID setpoint temperature at the desired rate.
-	
-	For the research conducted here, an automated PID controller was constructed using Arduino microcontroller, an open-source hardware thermocouple add-on, and the existing solid-state relay within the Thermolyne furnace.  
-	The Arduino microcontroller is well-documented (cite:arduino.cc), and its form factor supports a number of add-on boards(``shields'') produced by a large number of independant amateur and commercial vendors.
-	The thermocouple ``shield'' contains four addressable MAX31855 thermocouple digitizers with cold-junction compensation and includes connectors for four K-type thermocouples.
-	The solid-state relay within the Thermolyne furnace was easy to control, as the old PID control could be simply disconnected and swapped for a new controller (include pic when i'm willing to do disconnect the furnace).
-
-	The Arduino has a USB computer interface but also runs stand-alone code independantly of the computer.
-	This means the oven temperature is always controlled by the microcontroller, but the computer interface may be used to request changes to the program running on the controller.
-	The computer is used to set a final setpoint temperature and a rate at which the temperature should be approached.  
-	The microcontroller uses these two parameters, along with the current temperature measured from its sensor, to break the ramp into a time-dependant setpoint temperature to pass to a PID algorithm.
-	The PID algorithm decides how best to approach the current setpoint (which will change over time), and over time, the fial setpoint will be reached.
-
-	[the PID is better described by code or flow chart than equation]
-
-
-	In the modified temperature controller, any single one of four thermocouples can be used in the PID controller.	
-	
-	
-
-	\subsection{Temperature Measurement}
-	
-	\begin{figure}
-		\includegraphics[width=70mm]{images/oven_tc_placement.eps}
-		\caption{Placement of the three thermocouples and the sample within the furnace used to measure furnace/sample temperature.  TC1 is the glass-slide thermocouple, TC2 is a bare TC, TC3 is the furnace TC, and S is the sample.}
-		\label{f:furnace_tc}
-	\end{figure}
-	
-	\begin{figure}
-		\includegraphics[width=150mm]{images/plot_logR_vs_tc1_and_tc3.eps}
-		\caption{If temperature is accurately measured, the log impedance of the bare IDE sample will match on heating and cooling.  If the thermocouple temperature heats faster than the sample, the sample resistance will appear higher on (fast) heating than (slow) cool-down (red trace).  If the thermocouple temperature lags the sample temperature on heating, the sample resistance will appear lower on heating than cool-down (black trace).  The closer the overlap between heating and cooling, the better the thermocouple matches the temperature seen by the sample. }
-		\label{f:logR_vs_t1_and_t3}
-	\end{figure}
-	
-	\begin{figure}
-		\includegraphics[width=150mm]{images/residual_plot_tc3_vs_tc1.eps}
-		\caption{f:plot\_tc3\_vs\_tc1}
-		\label{f:plot_tc3_vs_tc1}
-	\end{figure}
-	
-	Use of multiple thermocouples (Figure ~\ref{f:furnace_tc}) to measure furnace temperature during very rapid heating showed large temperature gradients within the furnace, and that the glass slides on which the samples are mounted slow the heating of the sample.
-
-	Three thermocouples were used to measure furnace temperature.  
-	The furnace has a heavy gauge K-type thermocouple at the top of the furnace (tc3 in Figure ~\ref{f:furnace_tc}).  
-	A bare 10 mil ($254{\mu}m$) thermocouple (tc2 in Figure ~\ref{f:furnace_tc}) was situated near the bottom of the furnace.  
-	A third thermocouple (tc1 in Figure ~\ref{f:furnace_tc}) was attached to a glass microscope slide with a dab of silver epoxy and placed next to the sample.
-	
-	The IDE sample is responsive to temperature, and a bare IDE should show the same impedance during (fast) heating as it shows during (slow) cooling (Figure ~\ref{f:logR_vs_t1_and_t3}).  
-	If the temperature measured by a thermocouple results poor overlap of the IDE impedance on the heating and cooling phases, a temperature error can be inferred.
-	In this way the bare slide can serve as a fourth temperature-sensitive device to confirm that the "sample temperature" inferred from the thermocouple temperature measurements accurately tracks temperature.  
-	
-	The furnace PID controller creates a closed-loop temperature control system, using a single thermocouple to measure the furnace temperature, and a solid-state relay to turn the furnace on and off. 
-
-	In the modified temperature controller, any thermocouple can be used in the PID controller.	
-	
-	For all furnace tests in Spring 2012, we selected a thermocouple mounted to a glass slide by silver epoxy to close the loop of the PID system.
-	Since the glass-slide TC best tracks the temperature of the IDE sample, it was believed to result in fastest heating.
-	However, because the glass is slower to heat than the air, it can cause a situation in which the furnace overheats. 
-	
-	It was discovered in early testing that the glass slide IDE lags behind the temperature at the top of the furnace by as much as $200^{\circ}C$ during fast heating of $30^{\circ}C/min$ (Figure ~\ref{f:residual_plot_tc3_vs_tc1}).  
-	The build-up of heat and the lag of the glass TC resulted in an overheating of the oven when there is no additional safety measures.  
-	A safety measure was introduced into the furnace controller code to turn off the heat if any TC measured greater than $+50^{\circ}C$ from the furnace setpoint.
-
-	For all furnace tests in Summer 2012, we selected a bare thermocouple positioned at the bottom of the furnace (tc2 in Figure ~\ref{furnace_tc}) to close the loop of the PID system.
-	Use of the bare TC in the PID system avoids the problem of overheating, and in testing (Section ~\ref{sec:Temperature_Uniformity_Three_Slides}), the glass slide temperature was controlled under fast heating to $625^{\circ}C$ at a rate of $30^{\circ}C/min$ with an overshoot of the sample temperature (measured by the glass slide) of just $2^{\circ}C$  [TBR].  
-	The lack of run-away heating results from the rapid response of the glass slide thermocouple to small changes in air temperature within the furnace, and the mass of the glass slide which causes a slow approach to the final temperature.
-
-	
-	\subsection{Temperature Errors: Fast Heating is Uneven} \label{sec:Temperature_Uniformity_Three_Slides}
-
-	\subsubsection{Analysis of Furnace Temperature Uniformity Using Three Glass Slide Thermocouples}
-
-	\begin{figure}
-		\includegraphics[width=140mm]{images/Oven_Thermocouple_4x.eps}
-		\caption{Additional glass slide thermocouples were produced and used to measure the uniformity of the furnace temperature and similarity among glass-slide thermocouples.  Three glass slide thermocouples were used for measurement, and a fourth bare TC was used in the PID controller during this test.}
-	\end{figure}
-	\begin{figure}
-		\includegraphics[width=140mm]{images/heating_data.eps}
-		\includegraphics[width=140mm]{images/variance_vs_rate.eps}
-		\caption{The plot at left shows the standard deviation among the three glass slide thermocouples during fast heating, which is approximately the magnitude of the bias uncertainty in temperature during heating.  The temperature variance versus heating rate is plotted at left.  The magnitude of the temperature gradients across the base of the furnace are non-linearly proportional to temperature.}
-	\end{figure}
-	
-	To test the reproducibility of the glass slide thermocouple, three glass slide thermocouples were made, by affixing a K-type thermocouple to the surface of a glass microscope slide.
-	A fourth thermocouple was left bare and placed at the bottom of the furnace for use in the PID temperature controller.
-	While the glass slide thermocouple can be used in the PID loop to raise the furnace temperature, it requires a gradient limiter to function safely.  
-	The gradient limiter shuts off heating if the temperature between any two thermocouples exceeds a threshold ($50^{\circ}C$ was used), and is best used with one thermocouple at the top of the furnace (otherwise the gradient is not well sampled).
-
-	Because the temperature controller built for this project is limited to four K-type thermocouples, a trade-off was made between fast heating (for which a glass slide TC is used) and complexity (the requirement that the heating gradient be limited). 
-	A consequence to using an furnace shut-off is that the heating is no longer at an even rate, and the temperature characterization emphasizes errors (Figure "shutoff emphasizes errors in Au25 test").
-
-	Results of the glass slide thermocouple uniformity measurement shows that three glass slides placed across the bottom of the furnace, when heated at a rate $25^{\/circ}C$ per second, show a disagreement of $X^{\circ}C$ at the fastest rate of heating (Figure "three slides result").
-
-	\clearpage
-	
 	\section{In-Situ Transport Measurements and Complex Impedance}
 
-	\subsection{Electron Transport Measurement using Complex Impedance}
-	A four-point impedance measurement measures complex impedance of the IDE sample under test (device under test, or DUT).  
-	Impedance measurements follow a temperature dependence derived from models of electron transport under an AC potential.  
-	Complex impedance and temperature measurements are used to solve electron mobility under the AC electron transport model detailed below.  
-	Temperature measurements were limited to those measurements taken during cool-down of the DUT, since temperature measurements during fast heating of the sample carry very large errors.  
-	Measurements of impedance over temperature during cool-down (FIGURE "cooldown\_residuals") were identical within uncertainties for the Au$_25$ sample (JD04) and a bare IDE sample (JD05), and electron mobility will be identical.  
-	Electron mobility calculated for the Au$_25$ (JD04) sample was ${\epsilon\over{k}} = 1.1e+04 K$, $\epsilon = 0.96 eV$.
-		
-	\subsubsection{Introduction: Measurement of Complex Impedance} 
-	DC resistance measurements of the electrode show only its insulating properties, as the glass substrate is a poor conductor and the IDE is a weak capacitor, so AC resistance is measured.
-	AC resistance in the IDE samples follows the temperature-dependent electron mobility.
-	
-	\begin{equation}
-		R = R_0 \cdot e^{\epsilon\over{k \cdot T}}
-		\label{eq:emobility}
-	\end{equation}
-	
-	This equation can be rearranged into a linear equation to solve for $\epsilon$.
-	
-	\begin{equation}
-		ln(R) = {\epsilon\over{k}} {1\over{T}} - ln(R_0)
-		\label{eq:solve_emobility}
-	\end{equation}
-	
-	${\epsilon\over{k}}$ and $ln(R_0$ are found by least-squared fit of the linear portion of the data.
-	
-	\begin{figure}
-	
-	\includegraphics[scale=0.4]{images/electron_mobility.eps} 
-	\includegraphics[scale=0.4]{images/electron_mobility_residual.eps}
-	\label{f:emobility}
-	\caption{During cool-down of the sample, the impedance versus temperature measurements are well-sampled, and can be used to solve for electron mobility.  ${\epsilon\over{k}} = 1.1e+04 K$, $\epsilon = 0.96 eV$, $R_0 = 9.1e-3\Omega$.  Error bars are needed, and will have magnitude at least proportional to the fit residuals.}
-	\end{figure}
-	The temperature range observed is between $295K$ and $900K$, 
-	
-	Sample resistance (a parallel AC resistance) is typically high for the sample under test, this resistance changes when the sample is heated and the polymers are burned off.  
-
-	The resistance $R_p$ of a high-resistance sample can be measured from the complex impedance $(Z,\theta)$ by Equation ~\ref{eq:R_p}.  Use of the parallel resistance $R_p$ is justified at high sample resistance because the series resistance $R_s$ of the test leads and contacts are orders of magnitude smaller.
-	
-	\begin{equation}
-		R_p = {{Z} \over {cos({\theta})}}
-		\label{eq:R_p}
-	\end{equation}
-	
-	Typical values for complex impedance measured by the auto-balancing bridge method via an Agilent 82XX LCR meter are as follows.
-	
-	\begin{equation}
-		\left( Z,\theta,\nu,T \right) = \left( 15 M\Omega, -89.9^\circ, 1kHz, 22^{\circ}C \right)
-	\end{equation}
-	\begin{equation}
-		\left( Z, \theta, \nu, T \right) = \left( 800 k\Omega, -88^\circ, 45kHz, 22^{\circ}C \right)
-	\end{equation}
-	
-	This result shows that the $R_p$ ``resistance'' component (which is $Z$ divided by $cos(-89^\circ)$) is immeasurably high at low frequencies and low temperature.  It is only at higher temperatures that $R_p$ drops to the measurable range, and this occurs at about $250^{\circ}C$ when the impedance phase angle $\theta$ drops from $-89.9^\circ$ towards $0.1^\circ$.
-	
-	During the burn-off of the polymers, the parallel resistance may drop to under 100 ohms, which requires a four-point measurement to compensate for the series resistance test lead impedance.
-	A four-point measurement is necessary because the test leads have been reported (AD5933) to have up to kilo-ohm impedance when measuring low sample resistance.
-
+	\input{transport_measurements.tex}
 
 	\section{ Post-Processing Measurement Methods Discussion }
 	\subsection{AFM}
@@ -392,17 +238,21 @@
 	
 	
 	\section{Electron Transport Measurements of Au$_{25}$}
+	In-situ impedance measurements of Au$_{25}$ are indistinguishable from measurements of a bare electrode.
 	\subsection{Setup/Procedure}
+	
 	\subsection{Impedance, Temperature Measurements, AFM/SEM Images, LSPR}
 	\subsection{Conclusions}
 
 	\section{Electron Transport Measurements of Au$_{314}$}
+	In-situ impedance measurements of Au$_{314}$ shows a feature during heating.
 	\subsection{Setup/Procedure}
 	\subsection{Impedance, Temperature Measurements, AFM/SEM Images, LSPR}
 	\subsection{Conclusions}
 
 
-
+\clearpage
+\input{appendices.tex}
 
 \clearpage
 \bibliography{thesis_draft}

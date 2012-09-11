@@ -1,0 +1,42 @@
+
+	\section{Appendix A: Furnace Control and Temperature Measurement}
+
+	A furnace controller was designed to limit the heating of the sample to improve temperature measurement accuracy.
+
+	Source code for the furnace controller, and version-locked libraries for PID control and MAX31855 Thermocouple reader, are kept at a \url{https://github.com/John-NY/Arduino_Furnace_Controller_PID}.
+
+	\subsection{Furnace Controller block diagram}
+
+	\subsection{Furnace Controller Bill of Materials}
+
+	The furnace temperature controller was programmed on hardware consisting of an Arduino microcontroller and McLaughlin Engineering four channel MAX31855 K-type thermocouple interface board (Arduino ``shield''). 
+
+	A PID implementation was optimized for switch-type relays, that minimizes the number of switch events by limiting switch events to those of 1 second duration or longer.
+	Lifespan of a mechanical switch-type relay is measured in switch events, so minimizing the number of switch events will prolong life of the relay and minimize the likelihood of relay failure.
+	
+
+		\begin{itemize}
+
+			\item McLaughlin Engineering - MAX6675, MAX31855 breakout
+				\subitem Link: \url{http://ryanjmclaughlin.com/wiki}
+				\subitem Dimensions: Arduino Shield
+				\subitem Chip: MAX31855, TXB0104
+				\subitem Voltage: 5V, 3.3V
+				\subitem Header: 2 - 1x6 0.1" Pitch, 2 - 1x8 0.1" Pitch
+				\subitem Fixturing: Matching holes to Arduino
+
+			\item Omega Type-K Thermocouple
+				\subitem Bare Wire 0.010 K-type
+				\subitem Mini Connector K-type
+
+			\item Arduino Microcontroller
+
+				\subitem Link: \url{http://arduino.cc}
+
+		\end{itemize}
+
+	\subsection{Furnace Controller Schematic Block Diagram}
+	The temperature controller was 
+
+	\subsection{Arduino Code: Furnace Controller PID and Serial Ramp}
+
