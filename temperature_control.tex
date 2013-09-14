@@ -2,7 +2,9 @@
 	\subsection{Temperature Control}
 
 	[ Figures: Furnace Picture, Schematic, McL Engineeing TC shield image ... also link to the Appendix A]
+	An automated PID controller was constructed using Arduino microcontroller, an open-source hardware thermocouple add-on, and the existing solid-state relay within the Thermolyne furnace.  
 
+	\subsubsection*{Introduction}	
 	To allow temperature to be accurately measured (within $50^{\circ}C$ or better) during fast heating, the heating rate must be controlled.
 	The COTS Thermolyne furnace temperature controller is a simple PID, which when given a setpoint temperature, will approach this temperature as fast as its capabilities allow.
 	To slow the heating to a rate such that the sample temperature may be accurately measured, intermediate PID setpoints must be introduced leading to the final temperature.
