@@ -1,15 +1,26 @@
 
-	\subsection{Temperature Control}
+% This document, as written, discusses the problem of temperature knowledge %
+	\subsection{Temperature Control and Temperature Knowledge}
 
-	[ Figures: Furnace Picture, Schematic, McL Engineeing TC shield image ... also link to the Appendix A]
-	An automated PID controller was constructed using Arduino microcontroller, an open-source hardware thermocouple add-on, and the existing solid-state relay within the Thermolyne furnace.  
+% The next paragraph makes the distinction between "temperature" (which implies "sample temperature") and "thermocouple temperature".  %
+% We do not measure the sample temperature. %
+Automation was introduced to collect thermocouple temperature measurements at 1Hz sampling, in conjunction with the in-situ sample impedance measurements during heating, thermolysis, and annealing.  
+To quantify the accuracy of thermocouple measurments in predicting sample temperature, impedance was also measured for bare test samples on which no material had been deposited. 
+It was expected that the sample impedance at a given thermocouple temperature measured during fast heating should match the impedence at the same thermocouple temperature measured during slow cooling.
+Discrepancies in impedance vs. temperature, between fast heating and slow cooling, show accuracy uncertainty in the thermocouple measurement as a predictor of sample temperature.
 
+
+	An automated PID controller was constructed using Arduino microcontroller, a thermocouple daughter-board, and the existing solid-state relay within the Thermolyne furnace.  
+
+	[ Link to the Appendix TBD: Temperature Controller Schematics, BOM, and Code]
+	
 	\subsubsection*{Introduction}	
-	To allow temperature to be accurately measured (within $50^{\circ}C$ or better) during fast heating, the heating rate must be controlled.
+	To allow temperature to be accurately measured (within $50^{\circ}C$ or better) during fast heating, the heating rate must be controlled during heating.
 	The COTS Thermolyne furnace temperature controller is a simple PID, which when given a setpoint temperature, will approach this temperature as fast as its capabilities allow.
-	To slow the heating to a rate such that the sample temperature may be accurately measured, intermediate PID setpoints must be introduced leading to the final temperature.
+	To slow the heating to a rate such that the sample temperature may be accurately measured during heating, the PID setpoint was a time-varying function that ramps to the final temperature.
 
-	Prior experiments by Toyanath Joshi used a methodical and manual approach of increasing the PID setpoint temperature at the desired rate.
+	Prior experiments by Toyanath Joshi used a methodical and manual approach of increasing the PID setpoint temperature at the desired rate.  
+	A user-controlled ramp was 
 	
 	For the research conducted here, an automated PID controller was constructed using Arduino microcontroller, an open-source hardware thermocouple add-on, and the existing solid-state relay within the Thermolyne furnace.  
 	The Arduino microcontroller is well-documented (cite:arduino.cc), and its form factor supports a number of add-on boards(``shields'') produced by a large number of independant amateur and commercial vendors.
@@ -91,7 +102,7 @@
 		\caption{The plot at left shows the standard deviation among the three glass slide thermocouples during fast heating, which is approximately the magnitude of the bias uncertainty in temperature during heating.  The temperature variance versus heating rate is plotted at left.  The magnitude of the temperature gradients across the base of the furnace are non-linearly proportional to temperature.}
 	\end{figure}
 	
-	To test the reproducibility of the glass slide thermocouple, three glass slide thermocouples were made, by affixing a K-type thermocouple to the surface of a glass microscope slide.
+	To test the reproducibility of the glass slide thermocouple, three glass slide thermocouples were made, by affixing a K-type thermocouple to the surface of a glass microscope slide with silver epoxy.
 	A fourth thermocouple was left bare and placed at the bottom of the furnace for use in the PID temperature controller.
 	While the glass slide thermocouple can be used in the PID loop to raise the furnace temperature, it requires a gradient limiter to function safely.  
 	The gradient limiter shuts off heating if the temperature between any two thermocouples exceeds a threshold ($50^{\circ}C$ was used), and is best used with one thermocouple at the top of the furnace (otherwise the gradient is not well sampled).

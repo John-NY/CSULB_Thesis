@@ -1,12 +1,14 @@
 #!/bin/bash
 
-DOCUMENT=thesis_draft
-PDF=Donovan_Thesis
+# DOCUMENT=thesis_draft
+DOCUMENT=donovan_story.tex
+PDF=Donovan_Story
 
 bibtex ${DOCUMENT}.bib
 latex ${DOCUMENT}.tex
 dvips ${DOCUMENT}.dvi
 ps2pdf ${DOCUMENT}.ps
+rm ${DOCUMENT}.dvi ${DOCUMENT}.ps
 mv ${DOCUMENT}.pdf ${PDF}.pdf
 
 git add ${DOCUMENT}.tex
@@ -18,4 +20,4 @@ git add scriptie.sh
 git add images
 git commit -m 'auto upload'
 git push -u origin master
-#evince ${PDF}.pdf
+evince ${PDF}.pdf
