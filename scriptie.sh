@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # DOCUMENT=thesis_draft
-DOCUMENT=donovan_story.tex
+DOCUMENT=donovan_story
 PDF=Donovan_Story
 
 bibtex ${DOCUMENT}.bib
